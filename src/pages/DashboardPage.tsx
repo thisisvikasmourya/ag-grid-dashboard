@@ -28,9 +28,9 @@ export function DashboardPage() {
   const { rowData, lastUpdated, currentTick, updatesPerMinute } = useLiveDashboardRows()
   const [quickFilterText, setQuickFilterText] = useState('')
   const [themeId, setThemeId] = useState<ThemeId>(() => {
-    if (typeof window === 'undefined') return 'midnight'
+    if (typeof window === 'undefined') return 'light'
     const stored = window.localStorage.getItem(THEME_STORAGE_KEY)
-    return stored && isThemeId(stored) ? stored : 'midnight'
+    return stored && isThemeId(stored) ? stored : 'light'
   })
 
   const selectedTheme = useMemo(() => {
@@ -72,6 +72,7 @@ export function DashboardPage() {
       }),
     [],
   )
+  const wholeNumber = useMemo(() => new Intl.NumberFormat(undefined), [])
 
   const onThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const next = event.target.value
@@ -83,30 +84,54 @@ export function DashboardPage() {
   return (
     <div className={`dash-app dash-theme-${themeId}`}>
       <header className="dash-header">
-        <div className="dash-header__titles">
-          <h1 className="dash-title">Revenue operations</h1>
-          <p className="dash-subtitle">
-            Client-side AG Grid with a timed refresh that simulates live metrics
-            (no websocket). Sorting, filters, and pagination stay responsive.
-          </p>
+        <div className="dash-header__top">
+          <div className="dash-header__titles">
+            <h1 className="dash-title">Dashboard</h1>
+            <p className="dash-subtitle">Revenue operations command center</p>
+          </div>
+          <div className="dash-header__date-chip" aria-label="Current report date">
+            {new Intl.DateTimeFormat(undefined, { dateStyle: 'short' }).format(lastUpdated)}
+          </div>
         </div>
-        <div className="dash-kpis" aria-label="Live summary metrics">
-          <article className="dash-kpi-card">
-            <p className="dash-kpi-label">Portfolio value</p>
-            <p className="dash-kpi-value">
-              {compactCurrency.format(kpiData.totalRevenue)}
-            </p>
-          </article>
-          <article className="dash-kpi-card">
-            <p className="dash-kpi-label">Avg YoY growth</p>
-            <p className="dash-kpi-value">
-              {kpiData.avgGrowth >= 0 ? '+' : ''}
-              {kpiData.avgGrowth.toFixed(1)}%
-            </p>
-          </article>
-          <article className="dash-kpi-card">
-            <p className="dash-kpi-label">At-risk accounts</p>
-            <p className="dash-kpi-value">{kpiData.atRiskCount}</p>
+
+        <div className="dash-overview-grid">
+          <div className="dash-kpis" aria-label="Live summary metrics">
+            <article className="dash-kpi-card dash-kpi-card--revenue">
+              <p className="dash-kpi-label">Customers</p>
+              <p className="dash-kpi-value">{wholeNumber.format(rowData.length)}</p>
+              <p className="dash-kpi-meta">+5.2% since last month</p>
+            </article>
+            <article className="dash-kpi-card dash-kpi-card--growth">
+              <p className="dash-kpi-label">Orders</p>
+              <p className="dash-kpi-value">{wholeNumber.format(rowData.length * 12)}</p>
+              <p className="dash-kpi-meta">+1.2% since last month</p>
+            </article>
+            <article className="dash-kpi-card dash-kpi-card--revenue">
+              <p className="dash-kpi-label">Revenue</p>
+              <p className="dash-kpi-value">{compactCurrency.format(kpiData.totalRevenue)}</p>
+              <p className="dash-kpi-meta">Current period gross revenue</p>
+            </article>
+            <article className="dash-kpi-card dash-kpi-card--growth">
+              <p className="dash-kpi-label">Growth</p>
+              <p className="dash-kpi-value">
+                {kpiData.avgGrowth >= 0 ? '+' : ''}
+                {kpiData.avgGrowth.toFixed(2)}%
+              </p>
+              <p className="dash-kpi-meta">Across active portfolio accounts</p>
+            </article>
+          </div>
+
+          <article className="dash-analytics-card" aria-label="Weekly revenue trend">
+            <div className="dash-analytics-card__head">
+              <p className="dash-kpi-label">Revenue trend</p>
+              <p className="dash-kpi-meta">Current week vs previous week</p>
+            </div>
+            <div className="dash-chart-placeholder" aria-hidden="true">
+              <span className="dash-chart-dot dash-chart-dot--a" />
+              <span className="dash-chart-dot dash-chart-dot--b" />
+              <span className="dash-chart-dot dash-chart-dot--c" />
+              <span className="dash-chart-line" />
+            </div>
           </article>
         </div>
       </header>
