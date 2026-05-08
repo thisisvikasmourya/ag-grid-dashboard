@@ -1,0 +1,217 @@
+:root {
+  --text: #b7c3d9;
+  --text-h: #e9f0ff;
+  --text-muted: #8593ab;
+  --bg: #0a0f16;
+  --border: #1f2a3c;
+  --code-bg: #f4f3ec;
+  --accent: #3ea7ff;
+  --accent-strong: #29b5ff;
+  --accent-soft: rgba(62, 167, 255, 0.2);
+  --accent-bg: rgba(62, 167, 255, 0.14);
+  --accent-border: rgba(62, 167, 255, 0.55);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --dash-header-bg: #101a2a;
+  --dash-content-max-width: 1400px;
+  /* AG Grid needs a definite block height; % heights do not resolve from min-height alone. */
+  --dash-grid-height: min(80vh, 860px);
+  --sidebar-width: 196px;
+  --sidebar-bg: #0c1422;
+  --sidebar-border: #1f2a3c;
+  --sidebar-brand-bg: #121d2f;
+  --sidebar-link-fg: #98a7c0;
+  --sidebar-link-hover-bg: #172338;
+  --sidebar-link-hover-border: #263955;
+  --sidebar-link-active-bg: var(--accent-bg);
+  --sidebar-link-active-fg: #c7e8ff;
+  --sidebar-link-active-border: rgba(62, 167, 255, 0.45);
+  --sidebar-brand-fg: #e9f0ff;
+  --dash-status-active-fg: #53d88f;
+  --dash-status-risk-fg: #ffbe55;
+  --dash-status-churned-fg: #ff7a96;
+  --dash-status-pending-fg: #aebcd3;
+  --dash-live-indicator: #4ade80;
+  --dash-live-indicator-soft: rgba(74, 222, 128, 0.4);
+  --panel-bg: #101a2a;
+  --panel-border: #24354f;
+  --panel-border-strong: #2a3d5b;
+  --panel-shadow: 0 14px 28px rgba(0, 0, 0, 0.35);
+  --toolbar-chip-bg: #0e1726;
+  --toolbar-chip-fg: #a8b7cf;
+  --toolbar-chip-border: #2b3d5a;
+  --toolbar-input-bg: #0b1422;
+  --toolbar-input-border: #2d4261;
+  --toolbar-input-placeholder: #6f8099;
+  --grid-shell-bg: #0f1928;
+  --grid-header-bg: #152236;
+  --grid-header-fg: #d4e2f8;
+  --grid-fg: #cad6eb;
+  --grid-row-odd-bg: #112033;
+  --grid-row-hover-bg: rgba(62, 167, 255, 0.11);
+  --grid-row-selected-bg: rgba(62, 167, 255, 0.2);
+  --grid-border: #263952;
+  --grid-border-soft: #1e2f46;
+  --grid-input-border: #395377;
+  --shell-bg: radial-gradient(circle at 15% 0%, #1b2434 0%, #0d1118 45%, #0a0f16 100%);
+  --shadow:
+    rgba(0, 0, 0, 0.38) 0 14px 28px -8px, rgba(0, 0, 0, 0.32) 0 6px 12px -8px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  text-align: left;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+:root[data-dashboard-theme='slate'] {
+  --accent: #93a7ff;
+  --accent-strong: #a9b8ff;
+  --accent-soft: rgba(147, 167, 255, 0.2);
+  --accent-bg: rgba(147, 167, 255, 0.18);
+  --accent-border: rgba(147, 167, 255, 0.45);
+  --sidebar-bg: #131822;
+  --sidebar-brand-bg: #1a2331;
+  --sidebar-link-hover-bg: #222d40;
+  --sidebar-link-hover-border: #334663;
+  --sidebar-link-active-fg: #d7e0ff;
+  --sidebar-link-active-border: rgba(147, 167, 255, 0.48);
+  --dash-header-bg: #171f2d;
+  --panel-bg: #171f2d;
+  --panel-border: #2f3f5a;
+  --panel-border-strong: #3a4c6c;
+  --toolbar-chip-bg: #141b29;
+  --toolbar-chip-border: #3a4c6b;
+  --toolbar-input-bg: #121a28;
+  --toolbar-input-border: #445a80;
+  --grid-shell-bg: #182233;
+  --grid-header-bg: #23304a;
+  --grid-row-odd-bg: #1c2940;
+  --grid-row-hover-bg: rgba(147, 167, 255, 0.13);
+  --grid-row-selected-bg: rgba(147, 167, 255, 0.2);
+  --grid-border: #334764;
+  --grid-border-soft: #2a3b55;
+  --grid-input-border: #4a6190;
+  --shell-bg: radial-gradient(circle at 12% 0%, #232c40 0%, #151b28 48%, #121824 100%);
+}
+
+:root[data-dashboard-theme='light'] {
+  --text: #334155;
+  --text-h: #0f172a;
+  --text-muted: #64748b;
+  --bg: #f5f8fc;
+  --border: #d9e2ee;
+  --accent: #1d4ed8;
+  --accent-strong: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.15);
+  --accent-bg: rgba(37, 99, 235, 0.12);
+  --accent-border: rgba(37, 99, 235, 0.38);
+  --sidebar-bg: #eaf0f8;
+  --sidebar-border: #d3deec;
+  --sidebar-brand-bg: #f4f7fb;
+  --sidebar-link-fg: #334155;
+  --sidebar-link-hover-bg: #dae6f7;
+  --sidebar-link-hover-border: #c0d1e7;
+  --sidebar-link-active-fg: #1d4ed8;
+  --sidebar-link-active-border: rgba(29, 78, 216, 0.35);
+  --sidebar-brand-fg: #0f172a;
+  --dash-header-bg: #f8fbff;
+  --panel-bg: #f8fbff;
+  --panel-border: #d7e2f0;
+  --panel-border-strong: #c7d5e8;
+  --panel-shadow: 0 10px 20px rgba(100, 116, 139, 0.15);
+  --toolbar-chip-bg: #edf3fa;
+  --toolbar-chip-fg: #334155;
+  --toolbar-chip-border: #d0ddee;
+  --toolbar-input-bg: #ffffff;
+  --toolbar-input-border: #c5d4e8;
+  --toolbar-input-placeholder: #8aa0bc;
+  --grid-shell-bg: #ffffff;
+  --grid-header-bg: #edf3fb;
+  --grid-header-fg: #1e293b;
+  --grid-fg: #334155;
+  --grid-row-odd-bg: #f8fbff;
+  --grid-row-hover-bg: rgba(29, 78, 216, 0.07);
+  --grid-row-selected-bg: rgba(29, 78, 216, 0.14);
+  --grid-border: #d7e2f0;
+  --grid-border-soft: #e0e8f4;
+  --grid-input-border: #c2d0e4;
+  --dash-status-active-fg: #047857;
+  --dash-status-risk-fg: #b45309;
+  --dash-status-churned-fg: #be123c;
+  --dash-status-pending-fg: #475569;
+  --dash-live-indicator: #16a34a;
+  --dash-live-indicator-soft: rgba(22, 163, 74, 0.35);
+  --shell-bg: linear-gradient(180deg, #eef4fb 0%, #e9f0f8 100%);
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
